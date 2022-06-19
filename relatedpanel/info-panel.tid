@@ -1,0 +1,50 @@
+title: $:/plugins/can/omnitools/infopanel
+tags: $:/tags/ViewTemplate
+list-before: $:/plugins/can/omnitools/linkspanel
+
+\define can-toc-icon-link() <$button class="can-tiny-button-icon tc-btn-invisible" to={{!!title}} tooltip="Open tiddler in story" aria-label="Open tiddler in story">{{$:/plugins/can/omni/fish-water.svg}}</$button>
+
+\define makeinfofoldstate() $:/state/omnitools/$(currentTiddler)$-infofold
+
+\define bigfilter() $(backlinksfilt)$ $(listingtiddlersfilt)$ $(listingomnisfilt)$ -[[$:/DefaultTiddlers]] -[is[current]]
+
+\define linksfilt() [all[current]links[]]
+\define backlinksfilt() [all[current]backlinks[]sort[title]] -[is[current]]
+\define listingtiddlersfilt() [all[current]listed[]sort[title]] -[is[current]] -[tag[omnibus]] -[[$:/StoryList]]
+\define listingomnisfilt() [all[current]listed[]tag[omnibus]sort[title]] -[is[current]]
+\define listfilt() [list[]]
+
+
+\define exec()
+<$set name=showpanel filter="""$(bigfilter)$""" value=show emptyValue=hide>
+<$vars foldbuttonclass="tc-btn-invisible can-tiny-button-icon">
+<$list filter="[<showpanel>match[show]]" variable=null>
+    <div class="omni-info-panel">
+    ''Tiddlers linking and listing this one''
+        <$reveal type="match" state=<<makeinfofoldstate>> text="hide" tag="span">
+            <$button class=<<foldbuttonclass>> setTitle=<<makeinfofoldstate>> setTo="show">{{$:/core/images/right-arrow}}</$button>
+        </$reveal>
+        <$reveal type="nomatch" state=<<makeinfofoldstate>> text="hide" tag="span">
+            <$button class=<<foldbuttonclass>> setTitle=<<makeinfofoldstate>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+        </$reveal><br>
+        <$reveal type="nomatch" state=<<makeinfofoldstate>> text="hide">
+            <$list filter="$(bigfilter)$">
+                <$reveal type="nomatch" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+                    <$button class=<<foldbuttonclass>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="show"><$view field="title"/> {{$:/core/images/right-arrow}}</$button> <<can-toc-icon-link>><br>
+                </$reveal>
+                <$reveal type="match" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+                    <$button class=<<foldbuttonclass>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="hide"><$view field="title"/> {{$:/core/images/down-arrow}}</$button> <<can-toc-icon-link>><br>
+                    <span><$transclude field="text" mode="block" /></span>
+                </$reveal>
+            </$list>
+        </$reveal>
+        
+    
+    </div>
+</$list></$vars></$set>
+\end
+
+
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<<exec>>
+</$reveal>

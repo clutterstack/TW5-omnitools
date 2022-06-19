@@ -1,0 +1,15 @@
+created: 20200915201442088
+modified: 20200915201949789
+tags: $:/tags/Macro
+title: $:/plugins/can/omnitools/macros/toolbutton
+type: text/vnd.tiddlywiki
+
+\define omnivistitle() $:/can/omni/visibility/$(tid)$
+
+\define omni-toolbutton(tidd)
+<$vars tid=$tidd$>
+<$set name=btnclass filter="""tc-btn-invisible [<omnivistitle>get[text]match[open]then[can-btn-highlight]]"""> 
+<$set name=btnsetto filter="""[<omnivistitle>get[text]match[open]then[closed]else[open]]""" >
+<$button class=<<btnclass>> set=<<omnivistitle>> setTo=<<btnsetto>> >Dash</$button>
+</$set></$set></$vars>
+\end

@@ -1,0 +1,47 @@
+created: 20200916002933664
+modified: 20200916003007571
+tags: $:/tags/NotStylesheet
+title: $:/plugins/can/omnitools/stylesheet
+type: text/vnd.tiddlywiki
+
+/* for omnitools */
+
+.omni-bookmark-button {
+    display: flex;
+    flex-direction: row;
+    border-radius: 3px;
+    align-self: flex-start;
+    margin-bottom: 0.4em;
+
+}
+
+.omni-pill-lhs {
+/* border-radius: 1em 0 0 1em; */
+margin-right: 0;
+ border: none;
+ background-color: none;
+}
+
+.omni-pill-rhs {
+/* border-radius: 0 1em 1em 0; */
+margin-left: 0;
+border: none;
+background-color: none;
+}
+
+div.omnitools-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.tc-sidebar-tab-open .tc-btn-mini.omnitools-closebutton svg {
+    fill: none;
+}
+
+.tc-sidebar-tab-open .omnitools-closebutton.bookmark-button-open svg {
+    fill: #ffaaaa;
+}
+
+.omni-search-input { width: 10em; }
+
+div.omni-info-panel { background-color: #eee;}

@@ -1,0 +1,57 @@
+title: $:/plugins/can/omnitools/infopanelold
+tags: 
+list-after:
+
+\define makefoldstate() $:/state/omnitools/$(currentTiddler)$-infofold
+
+<$list filter="[all[current]!tag[omnibus]]" variable="null">
+<div class="omni-info-panel">
+<h3><$reveal type="nomatch" state=<<makefoldstate>> text="show" tag="span">
+<$button class=<<tv-config-toolbar-class>> setTitle=<<makefoldstate>> setTo="show">{{$:/core/images/right-arrow}}</$button>
+</$reveal><$reveal type="match" state=<<makefoldstate>> text="show" tag="span">
+<$button class=<<tv-config-toolbar-class>> setTitle=<<makefoldstate>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+</$reveal>Links and lists</h3>
+
+<$reveal type="match" state=<<makefoldstate>> text="show">
+Backlinks:<br>
+<$list filter="[!is[system]all[current]backlinks[]sort[title]] -[is[current]]"><$link><$view field="title"/></$link>
+<$reveal type="nomatch" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="show">{{$:/core/images/right-arrow}}</$button><br/>
+</$reveal>
+<$reveal type="match" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+<span><$transclude field="text" mode="block" /></span>
+</$reveal>
+</$list>
+
+Listing tiddlers:<br>
+<$list filter="[!is[system]all[current]listed[]sort[title]] -[is[current]] -[tag[omnibus]] -[[$:/StoryList]]"><$link><$view field="title"/></$link>
+<$reveal type="nomatch" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="show">{{$:/core/images/right-arrow}}</$button><br/>
+</$reveal>
+<$reveal type="match" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+<span class="indent1">
+<$transclude field="text" mode="block" /></span>
+</$reveal>
+</$list>
+
+Listing omnibuses:<br>
+<$list filter="[!is[system]all[current]listed[]tag[omnibus]sort[title]] -[is[current]]"><$link><$view field="title"/></$link><br></$list>
+
+
+List:<br>
+<$list filter="[!is[system]all[current]list[]sort[title]]"><$link><$view field="title"/></$link>
+<$reveal type="nomatch" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="show">{{$:/core/images/right-arrow}}</$button><br/>
+</$reveal>
+<$reveal type="match" stateTitle="$:/state/omnitools/infofold" stateIndex=<<currentTiddler>> text="show">
+<$button class=<<tv-config-toolbar-class>> setTitle="$:/state/omnitools/infofold" setIndex=<<currentTiddler>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+<$transclude field="text" mode="block" />
+</$reveal>
+</$list>
+
+</$reveal>
+</div>
+
+</$list>

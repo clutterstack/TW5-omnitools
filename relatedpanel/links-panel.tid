@@ -1,0 +1,58 @@
+title: $:/plugins/can/omnitools/linkspanel
+tags: $:/tags/ViewTemplate
+list-after:
+
+\define can-toc-icon-link() <$button class="can-tiny-button-icon tc-btn-invisible" to={{!!title}} tooltip="Open tiddler in story" aria-label="Open tiddler in story">{{$:/plugins/can/omni/fish-water.svg}}</$button>
+
+\define makelinksfoldstate() $:/state/omnitools/$(currentTiddler)$-linksfold
+
+
+\define backlinks() [all[current]backlinks[]]
+\define grands() [all[current]backlinks[]backlinks[]]
+\define refbygrands() [all[current]backlinks[]backlinks[]links[]]
+\define siblings() [all[current]backlinks[]links[]]
+\define links() [all[current]links[]]
+\define grandlinks() [all[current]links[]links[]]
+\define grandlinksrefs() [all[current]links[]links[]backlinks[]]
+\define peers() [all[current]links[]backlinks[]]
+
+\define bigfilter() $(grands)$ $(refbygrands)$ $(backlinks)$ $(siblings)$ $(peers)$ $(links)$ $(grandlinks)$ $(grandlinksrefs)$ -[is[current]]
+
+\define listingtiddlersfilt() [all[current]listed[]sort[title]] -[is[current]] -[tag[omnibus]] -[[$:/StoryList]]
+\define listingomnisfilt() [all[current]listed[]tag[omnibus]sort[title]] -[is[current]]
+\define listfilt() [list[]]
+
+
+\define exec()
+<$set name=showpanel filter="""$(bigfilter)$""" value=show emptyValue=hide>
+<$vars foldbuttonclass="tc-btn-invisible can-tiny-button-icon">
+<$list filter="[<showpanel>match[show]]" variable=null>
+    <div class="omni-info-panel">
+    ''Related by links''
+        <$reveal type="match" state=<<makelinksfoldstate>> text="hide" tag="span">
+            <$button class=<<foldbuttonclass>> setTitle=<<makelinksfoldstate>> setTo="show">{{$:/core/images/right-arrow}}</$button>
+        </$reveal>
+        <$reveal type="nomatch" state=<<makelinksfoldstate>> text="hide" tag="span">
+            <$button class=<<foldbuttonclass>> setTitle=<<makelinksfoldstate>> setTo="hide">{{$:/core/images/down-arrow}}</$button>
+        </$reveal><br>
+        <$reveal type="nomatch" state=<<makelinksfoldstate>> text="hide">
+            <$list filter="$(bigfilter)$">
+                <$reveal type="nomatch" stateTitle="$:/state/omnitools/linksfold" stateIndex=<<currentTiddler>> text="show">
+                    <$button class=<<foldbuttonclass>> setTitle="$:/state/omnitools/linksfold" setIndex=<<currentTiddler>> setTo="show"><$view field="title"/> {{$:/core/images/right-arrow}}</$button> <<can-toc-icon-link>><br>
+                </$reveal>
+                <$reveal type="match" stateTitle="$:/state/omnitools/linksfold" stateIndex=<<currentTiddler>> text="show">
+                    <$button class=<<foldbuttonclass>> setTitle="$:/state/omnitools/linksfold" setIndex=<<currentTiddler>> setTo="hide"><$view field="title"/> {{$:/core/images/down-arrow}}</$button> <<can-toc-icon-link>><br>
+                    <span><$transclude field="text" mode="block" /></span>
+                </$reveal>
+            </$list>
+        </$reveal>
+        
+    
+    </div>
+</$list></$vars></$set>
+\end
+
+
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<<exec>>
+</$reveal>

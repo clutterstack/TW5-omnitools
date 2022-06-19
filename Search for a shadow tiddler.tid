@@ -1,0 +1,17 @@
+tags: $:/tags/OmniTool
+title: Find a shadow tiddler by title
+type: text/vnd.tiddlywiki
+
+\define composefilter() [all[shadows]search:title:literal[$(termfield)$]]
+
+\define makelist()
+<$set name=termfield filter="""[{$:/state/tagbrowse-search!!searchinput}]""" select="0">
+search term is: <<termfield>><br>
+<$list filter=<<composefilter>>><$link/><br></$list>
+\end
+
+<div>Search for a literal term in the tiddler title:&nbsp;<$edit tiddler="$:/state/tagbrowse-search" field=searchinput class="omni-search-input"/></div>
+
+''Results:''
+
+<<makelist>>

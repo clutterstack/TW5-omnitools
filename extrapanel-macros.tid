@@ -1,0 +1,30 @@
+tags: $:/tags/Macro
+title: $:/plugins/can/omnitools/extrapanel-macros
+type: text/vnd.tiddlywiki
+
+
+\define can-omni-listfield()
+List: <$list filter="[list[]join[, ]]">{{!!title}}</$list><br>
+\end
+
+
+\define can-todo-done()
+<$button class="tc-btn-invisible can-small-text-button">
+<$reveal type="nomatch" state="!!show-done" text="show" >
+	<$action-setfield show-done='show'/>
+	Done items<span class="tc-menubar-dropdown-arrow"><$transclude tiddler="$:/core/images/down-arrow" mode="inline"/></span>
+</$reveal>
+<$reveal type="match" state="!!show-done" text="show" >
+	<$action-setfield show-done='hide'/>
+	Done items<span class="tc-menubar-dropdown-arrow"><$transclude tiddler="$:/core/images/up-arrow" mode="inline"/></span>
+</$reveal>
+</$button>
+<$reveal type="match" state="!!show-done" text="show" >
+<br>
+<$list filter="[tag[todo]tag[done]contains:omniparent[$(currentTiddler)$]]"><<omnilabel>><br></$list>
+</$reveal>
+\end
+
+
+\define can-clean-list() <$button actions="<$action-listops $filter='[all[current]list[]is[tiddler]]'/><$action-sendmessage $message='tm-auto-save-wiki'/>">clean list</$button>
+

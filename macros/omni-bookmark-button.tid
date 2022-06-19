@@ -1,0 +1,12 @@
+tags: $:/tags/Macro
+title: $:/plugins/can/omnitools/macros/omni-bookmark-button
+type: text/vnd.tiddlywiki
+
+\define omni-bookmark-button(title)
+<$vars tidtitle="$title$">
+<$set name=labelclass filter='omni-bookmark-button [[$:/StoryList]contains:list<tidtitle>then[bookmark-button-open]]'>
+<div class=<<labelclass>> >
+    <$button class="omni-pill-lhs" message=tm-close-tiddler param=<<tidtitle>> >&times;</$button><$button class="omni-pill-rhs" to=<<tidtitle>> ><<tidtitle>></$button>
+</div>
+</$set></$vars>
+\end 

@@ -1,0 +1,9 @@
+title: $:/plugins/can/omnitools/new-omnibus-button
+tags: $:/tags/Macro
+
+\define new-omnibus-button()
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" title="Create new omnibus tiddler" tags="omnibus" />
+New omnibus
+</$button>
+\end

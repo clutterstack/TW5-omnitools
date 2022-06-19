@@ -1,0 +1,45 @@
+tags: $:/tags/SideBar
+title: $:/plugins/can/omnitools/omnitools-dash
+type: text/vnd.tiddlywiki
+caption: Omnitools
+
+\whitespace trim
+\define lingo-base() $:/language/CloseAll/
+
+\define drop-actions()
+<$action-listops $tiddler="$:/config/omnitools/dashlist" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\define placeholder()
+<div class="tc-droppable-placeholder"/>
+\end
+
+\define droppable-item(button)
+\whitespace trim
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>
+<<placeholder>>
+<div>
+$button$
+</div>
+</$droppable>
+\end
+
+\define buttondef()
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<labelclass>> >{{$:/core/images/close-button}}</$button>&nbsp;<$link to={{!!title}}><$view field="title"/></$link>
+\end
+
+<div class="tc-sidebar-tab-open">
+<$list filter="[all[shadows+tiddlers]list[$:/config/omnitools/dashlist]]">
+    <$set name=labelclass filter='tc-btn-invisible tc-btn-mini omnitools-closebutton [[$:/StoryList]contains:list<currentTiddler>then[bookmark-button-open]]'>
+        <div class="tc-sidebar-tab-open-item">
+        <$macrocall $name="droppable-item" button=<<buttondef>>/>
+				</div>
+		</$set>
+</$list>
+</div>
+
+<hr>
+
+<div class="omnitools-buttons">
+    <<omni-cleanlists-button>>
+</div>

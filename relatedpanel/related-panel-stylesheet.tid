@@ -1,0 +1,11 @@
+tags: $:/tags/Stylesheet
+title: $:/plugins/can/omnitools/relatedpanel-stylesheet
+type: text/vnd.tiddlywiki
+
+
+.can-tiny-button-icon svg{
+    font-size: 0.6rem;
+    height: 0.6rem;
+    width: 0.6rem;
+    fill: #666666;
+}
