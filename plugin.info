@@ -2,9 +2,9 @@
     "title": "$:/plugins/can/omnitools",
     "description": "Omnitools - accessories for TW",
     "author": "Chris Nicoll",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "core-version": ">=5.1.22",
     "list": "readme documentation license",
     "plugin-type": "plugin",
-    "dependents": "[[$:/plugins/can/omni]], [[$:/plugins/can/quick]]"
+    "dependents": "[[$:/plugins/can/omni]]]"
 }

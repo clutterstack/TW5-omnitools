@@ -1,5 +1,5 @@
 title: $:/plugins/can/omnitools/infopanel
-tags: $:/tags/ViewTemplate
+tags: not$:/tags/ViewTemplate
 list-before: $:/plugins/can/omnitools/linkspanel
 
 \define can-toc-icon-link() <$button class="can-tiny-button-icon tc-btn-invisible" to={{!!title}} tooltip="Open tiddler in story" aria-label="Open tiddler in story">{{$:/plugins/can/omni/fish-water.svg}}</$button>
